@@ -181,6 +181,13 @@ d_epel(){
     curl -o /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-7.repo
 }
 
+d_mysql_repo(){
+	rpm -ivh https://dev.mysql.com/get/mysql80-community-release-el7-3.noarch.rpm
+	yum clean all
+    rm -rf /var/cache/yum
+    yum makecache
+}
+
 d_init(){
     yum remove -y dhclient dhcp-*
     yum -y install vim wget bash-completion gcc gcc-c++ lftp lrzsz screen unzip bzip2 git gdb net-tools bind-utils lsof yum-utils psmisc tree
@@ -266,4 +273,9 @@ d_disable_ipv6(){
             sed -i 's/IPV6INIT=yes/IPV6INIT=no/g' $line
         fi
     done
+}
+
+d_disable_selinux(){
+	setenforce 0
+	sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config
 }
