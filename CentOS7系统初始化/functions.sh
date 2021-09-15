@@ -182,8 +182,8 @@ d_epel(){
 }
 
 d_mysql_repo(){
-	rpm -ivh https://dev.mysql.com/get/mysql80-community-release-el7-3.noarch.rpm
-	yum clean all
+    rpm -ivh https://dev.mysql.com/get/mysql80-community-release-el7-3.noarch.rpm
+    yum clean all
     rm -rf /var/cache/yum
     yum makecache
 }
