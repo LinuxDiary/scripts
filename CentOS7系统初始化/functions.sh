@@ -190,7 +190,7 @@ d_mysql_repo(){
 
 d_init(){
     yum remove -y dhclient dhcp-*
-    yum -y install vim wget bash-completion gcc gcc-c++ lftp lrzsz screen unzip bzip2 git gdb net-tools bind-utils lsof yum-utils psmisc tree
+    yum -y install vim wget bash-completion gcc gcc-c++ lftp lrzsz screen unzip bzip2 git gdb net-tools bind-utils lsof yum-utils psmisc tree htop telnet mysql-community-client
 
     # yum update -y
 }
