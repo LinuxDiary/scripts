@@ -38,27 +38,30 @@ case "$index" in
         ;;
     3)  d_mysql_repo
 	;;
-    4)  d_init
+    4)  d_docker
         ;;
-    5)  d_ntp
+    5)  d_init
+        ;;
+    6)  d_ntp
         Echo_Green "Now the time is: "; date +%H:%M:%S
         ;;
-    6)  d_firewalld
-        Echo_Green "The iptables rules: "; iptables -nvL
+    7)  d_firewalld
+        Echo_Green "The firewalld rules: "; firewall-cmd --list-all
         ;;
-    7)  d_vi
+    8)  d_vi
         ;;
-    8)  d_sysctl
+    9)  d_sysctl
         ;;
-    9) d_disable_ipv6
+    10) d_disable_ipv6
         ;;
-    10) d_disable_selinux
+    11) d_disable_selinux
         ;;
     0)  exit 0
         ;;
     *)  d_yum
         d_epel
 	d_mysql_repo
+	d_docker
         d_init
         d_ntp
         d_firewalld
