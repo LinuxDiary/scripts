@@ -213,6 +213,7 @@ gpgcheck=1
 
 d_mysql_repo(){
     rpm -ivh https://dev.mysql.com/get/mysql80-community-release-el7-3.noarch.rpm
+    rpm --import https://repo.mysql.com/RPM-GPG-KEY-mysql-2022
     yum clean all
     rm -rf /var/cache/yum
     yum makecache
