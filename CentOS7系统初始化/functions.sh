@@ -206,6 +206,7 @@ enabled=0
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7
 gpgcheck=1
 ' > /etc/yum.repos.d/epel.repo
+    curl -o /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7 https://archive.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-7
     yum clean all
     rm -rf /var/cache/yum
     yum makecache
