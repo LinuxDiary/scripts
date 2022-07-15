@@ -206,6 +206,9 @@ enabled=0
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7
 gpgcheck=1
 ' > /etc/yum.repos.d/epel.repo
+    yum clean all
+    rm -rf /var/cache/yum
+    yum makecache
 }
 
 d_mysql_repo(){
