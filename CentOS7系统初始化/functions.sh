@@ -225,6 +225,7 @@ d_docker(){
     sed -i 's+download.docker.com+mirrors.tuna.tsinghua.edu.cn/docker-ce+' /etc/yum.repos.d/docker-ce.repo
     yum makecache fast
     yum -y install docker-ce
+    systemctl enable --now docker
 }
 
 d_init(){
