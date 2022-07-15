@@ -113,7 +113,7 @@ Press_Continue()
     stty ${OLDSTTY}
 }
 
-t_yum()
+d_yum()
 {
     mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup
     echo '
@@ -166,14 +166,14 @@ gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
     yum makecache
 }
 
-d_yum(){
-    mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup
-    curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
-    sed -i '/aliyuncs/d' /etc/yum.repos.d/CentOS-Base.repo
-    yum clean all
-    rm -rf /var/cache/yum
-    yum makecache
-}
+# d_yum(){
+#     mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup
+#     curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
+#     sed -i '/aliyuncs/d' /etc/yum.repos.d/CentOS-Base.repo
+#     yum clean all
+#     rm -rf /var/cache/yum
+#     yum makecache
+# }
 
 d_epel(){
     [ -e /etc/yum.repos.d/epel.repo ] && mv /etc/yum.repos.d/epel.repo /etc/yum.repos.d/epel.repo.backup
