@@ -178,7 +178,34 @@ d_yum(){
 d_epel(){
     [ -e /etc/yum.repos.d/epel.repo ] && mv /etc/yum.repos.d/epel.repo /etc/yum.repos.d/epel.repo.backup
     [ -e /etc/yum.repos.d/epel-testing.repo ] && mv /etc/yum.repos.d/epel-testing.repo /etc/yum.repos.d/epel-testing.repo.backup
-    curl -o /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-7.repo
+    echo '
+[epel]
+name=Extra Packages for Enterprise Linux 7 - $basearch
+baseurl=https://mirrors.tuna.tsinghua.edu.cn/epel/7/$basearch
+#mirrorlist=https://mirrors.fedoraproject.org/metalink?repo=epel-7&arch=$basearch
+failovermethod=priority
+enabled=1
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7
+
+[epel-debuginfo]
+name=Extra Packages for Enterprise Linux 7 - $basearch - Debug
+baseurl=https://mirrors.tuna.tsinghua.edu.cn/epel/7/$basearch/debug
+#mirrorlist=https://mirrors.fedoraproject.org/metalink?repo=epel-debug-7&arch=$basearch
+failovermethod=priority
+enabled=0
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7
+gpgcheck=1
+
+[epel-source]
+name=Extra Packages for Enterprise Linux 7 - $basearch - Source
+baseurl=https://mirrors.tuna.tsinghua.edu.cn/epel/7/SRPMS
+#mirrorlist=https://mirrors.fedoraproject.org/metalink?repo=epel-source-7&arch=$basearch
+failovermethod=priority
+enabled=0
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7
+gpgcheck=1
+' > /etc/yum.repos.d/epel.repo
 }
 
 d_mysql_repo(){
@@ -186,6 +213,15 @@ d_mysql_repo(){
     yum clean all
     rm -rf /var/cache/yum
     yum makecache
+}
+
+d_docker(){
+    yum remove docker docker-client docker-client-latest docker-common docker-latest docker-latest-logrotate docker-logrotate docker-engine
+    yum install -y yum-utils device-mapper-persistent-data lvm2
+    yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+    sed -i 's+download.docker.com+mirrors.tuna.tsinghua.edu.cn/docker-ce+' /etc/yum.repos.d/docker-ce.repo
+    yum makecache fast
+    yum install docker-ce
 }
 
 d_init(){
@@ -201,17 +237,8 @@ d_ntp(){
     systemctl start chronyd
 }
 
-d_iptables(){
-    systemctl stop firewalld.service
-    systemctl disable firewalld.service
-
-    yum -y install iptables-services
-
-    systemctl start iptables.service
-    systemctl enable iptables.service
-
-    systemctl stop ip6tables.service
-    systemctl disable ip6tables.service
+d_firewalld(){
+    systemctl enable --now firewalld.service
 }
 
 d_vi(){
