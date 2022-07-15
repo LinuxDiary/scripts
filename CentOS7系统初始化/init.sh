@@ -13,14 +13,15 @@ Press_Start
 cat << EOF
     [1]Set yum-repos to tsinghua
     [2]Set epel-repo to tsinghua
-    [3]install mysql-repos from official
-    [4]Install basic utils, network utils and update system
-    [5]Set timezone and NTP
-    [6]Enable firewalld
-    [7]Set vi=vim
-    [8]Set sysctl.conf
-    [9]Disable ipv6
-    [10]Disable selinux
+    [3]Install mysql-repos from official
+    [4]Install docker-ce
+    [5]Install basic utils, network utils and update system
+    [6]Set timezone and NTP
+    [7]Enable firewalld
+    [8]Set vi=vim
+    [9]Set sysctl.conf
+    [10]Disable ipv6
+    [11]Disable selinux
     [a]Do all things(default)
     [0]Exit
 
